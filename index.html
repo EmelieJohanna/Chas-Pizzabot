@@ -12,13 +12,20 @@
       </header>
     </div>
     <div class="order">
-      <label>Order here!</label>
-      <input type="text" placeholder="Pizza type?" />
-      <input type="text" placeholder="How many?" />
-      <button>Beställ</button>
+      <label>Are you ready to order?</label>
+      <button id="btnReady">If so, click here!</button>
+    </div>
+
+    <div id="con1" class="hidden">
+      <label id="quest1"></label>
+      <input id="input1" type="text" placeholder="Pizza type?" />
+      <label id="quest2"></label>
+      <input id="input2" type="text" placeholder="How many?" /><button id="btn">
+        Send Order!
+      </button>
       <div id="result"></div>
     </div>
+
     <script src="./pizzabot.js" charset="utf-8"></script>
-    <!-- <script src="code.js"></script> -->
   </body>
 </html>

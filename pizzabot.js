@@ -6,10 +6,64 @@ const pizzaPrice = 80;
 
 //Put your Javscript code here:
 
+// DOM
+// Ready to order button
+const btnReady = document.querySelector("#btnReady");
+// Form div
+const form = document.querySelector("#con1");
+// Question elements
+const quest1 = document.getElementById("quest1");
+const quest2 = document.getElementById("quest2");
+// Input elements
+const inputEl1 = document.getElementById("input1");
+const inputEl2 = document.getElementById("input2");
+// Submit button
+const buttonEl = document.getElementById("btn");
+// Result element
+const resultEl = document.getElementById("result");
+
+// Adress the user, tell them the menu.
+alert(
+  "Hey! Happy to serve your pizza. On our menu we have " +
+    vegetarian +
+    ", " +
+    hawaiian +
+    ", and " +
+    pepperoni
+);
+
+// Click function "Ready to order?"
+btnReady.addEventListener("click", (e) => {
+  form.classList.add("visible");
+  form.classList.remove("hidden");
+});
+
+// Click function "Submit button"
+buttonEl.addEventListener("click", () => {
+  // Call on all functions
+  let orderType = checkOrderName(inputEl1.value);
+  let total = totalCost(pizzaPrice, inputEl2.value);
+  let time = cookingTime(inputEl2.value);
+  let singularOrPlural = sinOrPlu(inputEl2.value);
+
+  let finalMessage =
+    "Great, I'll get started on your " +
+    orderType +
+    " right away, it will cost " +
+    total +
+    " kr. The " +
+    singularOrPlural +
+    " will take " +
+    time +
+    " minutes.";
+  if (orderType) resultEl.textContent = finalMessage;
+});
+
 // FUNCTION 1!
 // Check if input orderName matches any of the pizza variables. three if-statements
 function checkOrderName(orderName) {
   orderName = orderName.toLowerCase();
+
   if (
     orderName == "vego" ||
     orderName == "vegetarian" ||
@@ -33,7 +87,7 @@ function checkOrderName(orderName) {
   }
 }
 
-// FUNCTION 2 !
+// FUNCTION 2!
 // Calculation for total order price.
 function totalCost(pizzaPrice, orderQuantity) {
   const numberOrderQuantity = parseFloat(orderQuantity);
@@ -50,12 +104,11 @@ function totalCost(pizzaPrice, orderQuantity) {
 //1-2 pizzas: The pizzas will take 10 minutes.
 //3-5 pizzas: The pizzas will take 15 minutes.
 //6+ pizzas: The pizzas will take 20 minutes.
-
 function cookingTime(orderQuantity) {
   let time;
   if (orderQuantity <= 3) {
     time = 10;
-  } else if (orderQuantity >= 6) {
+  } else if (orderQuantity <= 6) {
     time = 15;
   } else {
     time = 20;
@@ -63,7 +116,7 @@ function cookingTime(orderQuantity) {
   return time;
 }
 
-//singular or plural value?
+// singular or plural value?
 function sinOrPlu(orderQuantity) {
   if (orderQuantity > 1) {
     noun = "pizzas";
@@ -72,41 +125,3 @@ function sinOrPlu(orderQuantity) {
   }
   return noun;
 }
-
-// KALLA PÅ DOM
-
-// Adress the user, tell them the menu.
-alert(
-  "Hey! Happy to serve your pizza. On our menu we have " +
-    vegetarian +
-    ", " +
-    hawaiian +
-    ", and " +
-    pepperoni
-);
-
-// Ask what pizza they want.
-let orderName = prompt("Enter the name of the pizza you want to order today.");
-console.log("OrderName: ", orderName);
-let orderType = checkOrderName(orderName);
-
-// Ask user how many pizzas.
-let orderQuantity = prompt("How many of " + orderType + " do you want?");
-
-let total = totalCost(pizzaPrice, orderQuantity);
-let time = cookingTime(orderQuantity);
-console.log(cookingTime);
-let singularOrPlural = sinOrPlu(orderQuantity);
-
-let finalMessage =
-  "Great, I'll get started on your " +
-  orderType +
-  " right away, it will cost " +
-  total +
-  " kr. The " +
-  singularOrPlural +
-  " will take " +
-  time +
-  "minutes.";
-
-alert(finalMessage);
